@@ -1,0 +1,16 @@
+<h1> Settings <%= @setting.name %> </h1>
+
+<h2>Name: <%= @setting.name %></h2>
+<h2>Description: <%= @setting.description %></h2>
+
+
+<p><a href="/projects/<%= @project.id %>/settings/<%= @setting.id%>/edit"> Edit </a></p>
+
+
+<form method='POST' action="/projects/<%= @project.id %>/settings/<%= @setting.id %>/delete">
+<input type="hidden" name="_method" value="delete">
+
+<input type="submit" value="delete">
+
+
+<p><a href="/projects/<%= @project.id %>">Back</a></p>

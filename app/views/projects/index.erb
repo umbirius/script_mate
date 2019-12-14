@@ -1,0 +1,48 @@
+
+
+<h3><%= @user.username %>'s Projects</h3>
+<div class="table-responsive">          
+<table class="table">
+  <thead>
+    <tr>
+      <th>Project Name</th>
+      <th>Art Form</th>
+      <th>Genre</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @projects.each do |project| %>
+        <tr>
+            <td><a href="/projects/<%=project.id%>"><%= project.name%></a></td>
+            <td><%= project.artform%></td>
+            <td><%= project.genre%></td>
+            <td><%= project.bio%></td>
+            <td><a href="/projects/<%= project.id %>/edit" class=" btn btn-default btn-xs">Edit</a></td>
+            <td>
+                <form method='POST' action="/projects/<%= project.id %>/delete">
+                <input type="hidden" name="_method" value="delete">
+                <input type="submit" class="btn btn-default btn-xs" value="Delete">
+                </form>
+            </td>
+            
+        </tr>
+    <% end %> 
+
+  </tbody>
+</table>
+
+<p>
+<a href="/projects/new" class="btn btn-default btn-xs"> Add New Project
+</a>
+</p
+</p>
+<a href="/" class=" btn btn-default btn-xs">Home</a>
+</p> 
+</div>
+</div>
+
+</body>

@@ -1,0 +1,18 @@
+<h3><%= @project.name %></h3>
+<div class="container-fluid text"> 
+    <h4> Bio: </h4> <%= @project.bio %>
+    <h4> Type: </h4> <%= @project.artform %>
+    <h4> Genre: </h4> <%= @project.genre %>
+
+</div>
+    <hr>
+    <h3><a href="/projects/<%=@project.id%>/characters">Characters (<%=@characters.all.count%>) </a></h3>
+
+    <hr>
+    <h3><a href="/projects/<%=@project.id%>/settings">Settings (<%=@settings.all.count%>)</a></h3>
+    <hr>
+
+    <h3><a href="/projects/<%=@project.id%>/scenes">Scenes (<%=@scenes.all.count%>)</a></h3>
+
+    <a href="/projects" class=" btn btn-default btn-xs">Back</a>
+
