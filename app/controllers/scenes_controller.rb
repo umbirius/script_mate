@@ -1,4 +1,4 @@
-
+require 'byebug'
 class ScenesController < ApplicationController
 
     get '/projects/:id/scenes/new' do 
@@ -18,6 +18,37 @@ class ScenesController < ApplicationController
         erb :failure
         end
     end
+
+    get '/projects/:id/scenes/order/edit' do
+        @project=current_project
+        @user = current_user
+        @scenes = current_project.scenes
+        if @scenes 
+            erb :'scenes/order_edit'
+        else
+            @errors = [params.to_s]
+            erb :failure
+        end 
+    end
+
+    patch '/projects/:id/scenes/order' do
+        @project = current_project
+        @user = current_user
+        @scenes = @project.scenes
+        i = 0
+        @scenes.each do |scene|
+            scene.order = params[:order][i]
+            scene.save
+            i+=1
+        end
+
+        redirect "/projects/#{@project.id}/scenes"
+
+            # @errors = ["no page here"]
+            # erb :failure
+    end
+
+
 
     get '/projects/:id/scenes' do
         @project = current_project

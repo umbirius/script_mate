@@ -1,0 +1,59 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+  width: 20%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+
+</style>
+</head>
+
+
+<h3>Scenes</h3>
+    <div class="table-responsive">        
+    <form method="POST" action="/projects/<%= @project.id %>/scenes/order">
+    <input type="hidden" name="_method" value="patch">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th><label for="order">Order</label></th> 
+        </tr>
+      </thead>
+
+      <tbody>
+      <% if !!@scenes %>
+        <% @scenes.each do |scene| %>
+            <tr>
+                <td><a href="/projects/<%= @project.id%>/scenes/<%=scene.id%>"><%= scene.name%></a></td>
+                <td><%= scene.description%></td>
+                <td>
+                        <% if scene.order %>
+                            <input type="text" name="order[]" class="form-control" value="<%=scene.order%>">
+                        <% else %> 
+                            <input type="text" name="order[]" class="form-control" placeholder=Enter Order #>
+                        <% end %>
+                        </div>
+                </td>
+            </tr>
+        <% end %> 
+    <% end %>
+      </tbody>
+    </table>
+    <input type="submit" class="btn btn-default btn-xs" value="Save Order"></form>
+    <p><a href="/projects/<%=@project.id%>/scenes" class=" btn btn-default btn-xs">Back</a></p>
+    </div>
+    </div>
