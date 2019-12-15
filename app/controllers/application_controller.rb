@@ -5,6 +5,8 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "burger-king"
+
+    register Sinatra::Flash
   end 
 
   get '/' do
@@ -28,11 +30,12 @@ class ApplicationController < Sinatra::Base
   post '/signup' do
     user = User.new(user_params)
     if User.find_by(username: params[:username])
+      flash[:notice] = "There is a username associated with <%= params[:email] %>"
       @errors = ["User already signed up"]
-      erb :failure
+      redirect '/signup'
     elsif User.find_by(email: params[:email])
+      flash[:notice] = "There is a username associated with <%= params[:email] %>"
       @errors = ["There is a username associated with <%= params[:email] %>"]
-      erb :failure
     else
       @errors = ["Not yet implemented"]
       erb :failure

@@ -10,7 +10,7 @@ gem 'sinatra-activerecord', require: 'sinatra/activerecord'
 gem 'sqlite3'
 gem 'rake'
 gem 'bcrypt'
-gem 'sinatra-flash', require: 'sinatra/flash'
+gem 'sinatra-flash'
 
 group :test, :development do 
     gem 'pry'
