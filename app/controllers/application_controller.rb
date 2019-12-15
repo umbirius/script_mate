@@ -27,11 +27,15 @@ class ApplicationController < Sinatra::Base
 
   post '/signup' do
     user = User.new(user_params)
-    if user.save
-        redirect '/'
+    if User.find_by(username: params[:username])
+      @errors = ["User already signed up"]
+      erb :failure
+    elsif User.find_by(email: params[:email])
+      @errors = ["There is a username associated with <%= params[:email] %>"]
+      erb :failure
     else
-        @errors = ["Not yet implemented"]
-        erb :failure
+      @errors = ["Not yet implemented"]
+      erb :failure
     end
   end
 
@@ -43,6 +47,18 @@ class ApplicationController < Sinatra::Base
     session.clear
     redirect '/'
   end 
+
+
+  post '/login' do
+    @user = User.find_by(username: params[:username])
+    if @user && @user.authenticate(params[:password])
+        session[:user_id] = @user.id
+        redirect "/projects"
+    else
+        @errors = ["Invalid username or password"]
+        erb :failure
+    end
+  end
 
   helpers do 
     def logged_in?
@@ -64,18 +80,6 @@ class ApplicationController < Sinatra::Base
     end
     
   end 
-
-  post '/login' do
-    @user = User.find_by(username: params[:username])
-    if @user && @user.authenticate(params[:password])
-        session[:user_id] = @user.id
-        redirect "/projects"
-    else
-        @errors = ["Invalid username or password"]
-        erb :failure
-    end
-  end
-
 
 
   private
