@@ -65,7 +65,7 @@ class SettingsController < ApplicationController
         if @setting
             @setting.delete
             flash[:success] = "Setting has been deleted."
-            redirect "/projects/#{@project.id}"
+            redirect "/projects/#{@project.id}/settings"
         end
     end
 

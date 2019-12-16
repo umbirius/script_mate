@@ -1,0 +1,10 @@
+<h1>About</h1>
+<hr>
+
+<h3> <%=@time%></h3>
+<li>Developing Characters</li>
+<li>Creating Suspense</li>
+
+<% if !!logged_in? %>
+    <ul><a href="/projects">Projects</a></ul>
+<% end %>

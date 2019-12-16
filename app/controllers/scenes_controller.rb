@@ -107,7 +107,7 @@ class ScenesController < ApplicationController
         if @scene
             @scene.delete
             flash[:success] = "Scene has been deleted."
-            redirect "/projects/#{@project.id}"
+            redirect "/projects/#{@project.id}/scenes"
         end
     end
     private

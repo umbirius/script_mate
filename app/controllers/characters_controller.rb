@@ -64,7 +64,7 @@ class CharactersController < ApplicationController
         if @character
             @character.delete
             flash[:success] = "Character has been deleted."
-            redirect "/projects/#{@project.id}"
+            redirect "/projects/#{@project.id}/characters"
         end
     end
 
