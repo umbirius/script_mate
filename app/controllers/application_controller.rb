@@ -30,15 +30,14 @@ class ApplicationController < Sinatra::Base
   post '/signup' do
     user = User.new(user_params)
     if User.find_by(username: params[:username])
-      flash[:notice] = "There is a username associated with <%= params[:email] %>"
-      @errors = ["User already signed up"]
+      flash[:error] = "The username, #{params[:username]}, is already taken"
       redirect '/signup'
     elsif User.find_by(email: params[:email])
-      flash[:notice] = "There is a username associated with <%= params[:email] %>"
-      @errors = ["There is a username associated with <%= params[:email] %>"]
-    else
-      @errors = ["Not yet implemented"]
-      erb :failure
+      flash[:error] = "There is a username associated with #{params[:email]}"
+      redirect '/signup'
+    else 
+      flash[:success] = "Sign up successful!"
+      redirect '/login'
     end
   end
 
@@ -46,22 +45,25 @@ class ApplicationController < Sinatra::Base
     erb :login
   end
 
-  get '/logout' do
-    session.clear
-    redirect '/'
-  end 
-
-
   post '/login' do
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
-        session[:user_id] = @user.id
-        redirect "/projects"
+      session[:user_id] = @user.id
+      flash[:success] = "Login successful. Welcome, #{@user.username}!"
+      redirect '/'
+      redirect "/projects"
     else
-        @errors = ["Invalid username or password"]
-        erb :failure
+      flash[:error] = "Invalid username or password"
+      redirect '/login'
     end
   end
+
+  get '/logout' do
+    session.clear
+    flash[:success] = "Logout successful."
+    redirect '/'
+  end 
+
 
   helpers do 
     def logged_in?

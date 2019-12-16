@@ -1,4 +1,4 @@
-<% require 'sinatra/flash' %>
+<% require 'pry' %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -90,12 +90,17 @@
       <p><a href="#">Scenes</a></p>
     </div>
     <div class="col-sm-8 text-left"> 
-    
+
         <% flash.keys.each do |type| %>
-            <div data-alert class="flash <%= type %> alert-box radius">
-            <%= flash[type] %>
-            <a href="#" class="close">&times;</a>
-            </div>
+            <% if flash[type] == flash[:success] %>
+                <div class="panel panel-success">
+                    <div class="panel-heading"><%= flash[type] %></div>
+                </div>
+            <% elsif flash[type] == flash[:error] %>
+                <div class="panel panel-danger">
+                    <div class="panel-heading"><%= flash[type] %></div>
+                </div>
+            <% end %>
         <% end %>
 
       <%= yield %>

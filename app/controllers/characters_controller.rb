@@ -10,11 +10,9 @@ class CharactersController < ApplicationController
     post '/projects/:id/characters' do
         @user = current_user
         @character = Character.new(character_params)
-        if @character.save 
+        if @character.save
+            flash[:success] = "Character has been created."
             redirect "/projects/#{current_project.id}/characters"
-        else
-        @errors = [params.to_s]
-        erb :failure
         end
     end
 
@@ -43,10 +41,6 @@ class CharactersController < ApplicationController
         @project = current_project 
         if @character
             erb :'characters/edit'
-            # redirect "/projects/#{@project.id}/characters/#{@character.id}"
-        else
-            @errors = ["no page here"]
-            erb :failure
         end 
     end 
 
@@ -55,10 +49,8 @@ class CharactersController < ApplicationController
         @character = Character.find_by(id: params[:char_id])
         @project = current_project
         if @character.update(character_params)
+            flash[:success] = "Character update complete."
             redirect "/projects/#{@project.id}/characters"
-        else
-            @errors = ["no page here"]
-            erb :failure
         end
     end
 
@@ -68,10 +60,8 @@ class CharactersController < ApplicationController
         @project = current_project 
         if @character
             @character.delete
+            flash[:success] = "Character has been deleted."
             redirect "/projects/#{@project.id}"
-        else
-            @errors = ["no page here"]
-            erb :failure
         end
     end
 

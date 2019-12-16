@@ -18,10 +18,8 @@ class ProjectsController < ApplicationController
         @user = current_user
         project = Project.new(project_params)
         if project.save 
+            flash[:success] = "Project has been created."
             redirect '/projects'
-        else
-        @errors = [params.to_s]
-        erb :failure
         end
     end
     
@@ -52,10 +50,8 @@ class ProjectsController < ApplicationController
         @user = current_user
         @project = Project.find_by(id: params[:id])
         if @project.update(project_params)
+            flash[:success] = "Project update complete."
             redirect '/projects'
-        else
-            @errors = ["not implimented yet"]
-            erb :failure
         end 
     end
 
@@ -65,10 +61,8 @@ class ProjectsController < ApplicationController
         @project = Project.find_by(id: params[:id])
         if @project
             @project.delete
+            flash[:success] = "Project has been deleted."
             redirect "/projects"
-        else
-            @errors = ["no page here"]
-            erb :failure
         end
     end
 

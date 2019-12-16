@@ -1,20 +1,8 @@
-<h1> Character <%= @character.name %> </h1>
-
-<h2>Name: <%= @character.name %></h2>
+<h1><%= @character.name %> </h1>
 <hr>
-<h2>Age: <%= @character.age %></h2>
+<h2>Age:</h2>
+<p><%= @character.age %>
 <h2>Bio: <%= @character.bio %></h2>
 
 
-<p>
-    <li><a href="/projects/<%= @project.id %>/characters/<%= @character.id%>/edit"> Edit </a></li>
-</p>
-
-<form method='POST' action="/projects/<%= @project.id %>/characters/<%= @character.id %>/delete">
-<input type="hidden" name="_method" value="delete">
-
-<input type="submit" value="delete">
-
-</form>
-
-<p><a href="/projects/<%= @project.id %>">Back</a></p>
+<p><a href="/projects/<%= @project.id %>" class=" btn btn-default btn-xs">Back</a></p>

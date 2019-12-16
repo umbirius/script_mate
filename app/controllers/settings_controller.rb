@@ -10,11 +10,9 @@ class SettingsController < ApplicationController
     post '/projects/:id/settings' do
         @user = current_user
         @setting = Setting.new(setting_params)
-        if @setting.save 
+        if @setting.save
+            flash[:success] = "Setting has been created."
             redirect "/projects/#{current_project.id}/settings"
-        else
-        @errors = [params.to_s]
-        erb :failure
         end
     end
 
@@ -31,9 +29,6 @@ class SettingsController < ApplicationController
         @project = current_project
         if @setting 
             erb :'settings/id_page'
-        else 
-            @errors = ["no page here"]
-            erb :failure
         end
     end 
 
@@ -43,9 +38,6 @@ class SettingsController < ApplicationController
         @project = current_project 
         if @setting
             erb :'settings/edit'
-        else
-            @errors = ["no page here"]
-            erb :failure
         end 
     end 
 
@@ -54,10 +46,8 @@ class SettingsController < ApplicationController
         @setting = Setting.find_by(id: params[:sett_id])
         @project = current_project
         if @setting.update(setting_params)
+            flash[:success] = "Setting update complete."
             redirect "/projects/#{@project.id}/settings"
-        else
-            @errors = ["no page here"]
-            erb :failure
         end
     end
 
@@ -68,10 +58,8 @@ class SettingsController < ApplicationController
         @project = current_project 
         if @setting
             @setting.delete
+            flash[:success] = "Setting has been deleted."
             redirect "/projects/#{@project.id}"
-        else
-            @errors = ["no page here"]
-            erb :failure
         end
     end
 

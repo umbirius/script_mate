@@ -12,10 +12,8 @@ class ScenesController < ApplicationController
         @user = current_user
         @scene = Scene.new(scene_params)
         if @scene.save 
+            flash[:success] = "Scene has been created."
             redirect "/projects/#{current_project.id}/scenes"
-        else
-        @errors = [params.to_s]
-        erb :failure
         end
     end
 
@@ -25,9 +23,6 @@ class ScenesController < ApplicationController
         @scenes = current_project.scenes
         if @scenes 
             erb :'scenes/order_edit'
-        else
-            @errors = [params.to_s]
-            erb :failure
         end 
     end
 
@@ -41,11 +36,9 @@ class ScenesController < ApplicationController
             scene.save
             i+=1
         end
-
+        
         redirect "/projects/#{@project.id}/scenes"
-
-            # @errors = ["no page here"]
-            # erb :failure
+        flash[:success] = "Scene order has been updated."
     end
 
 
@@ -86,10 +79,8 @@ class ScenesController < ApplicationController
         @scene = Scene.find_by(id: params[:scene_id])
         @project = current_project
         if @scene.update(scene_params)
+            flash[:success] = "Scene update complete."
             redirect "/projects/#{@project.id}/scenes"
-        else
-            @errors = ["no page here"]
-            erb :failure
         end
     end
 
@@ -99,10 +90,8 @@ class ScenesController < ApplicationController
         @project = current_project 
         if @scene
             @scene.delete
+            flash[:success] = "Scene has been deleted."
             redirect "/projects/#{@project.id}"
-        else
-            @errors = ["no page here"]
-            erb :failure
         end
     end
     private
