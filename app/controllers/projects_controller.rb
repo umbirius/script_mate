@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
     end 
     
     get '/projects/new' do
+        redirect_if_not_logged_in
         @user = current_user
         erb :'projects/new' 
     end 
@@ -24,6 +25,7 @@ class ProjectsController < ApplicationController
     end
     
     get '/projects/:id' do
+        redirect_if_not_logged_in
         @user = current_user
         @project = Project.find_by(id: params[:id])
         session[:project_id] = @project.id
@@ -34,14 +36,12 @@ class ProjectsController < ApplicationController
     end
 
     get '/projects/:id/edit' do
+        redirect_if_not_logged_in
         @user = current_user
         redirect_if_not_logged_in 
         @project = Project.find_by(id: params[:id])
         if @project 
             erb :'projects/edit'
-        else 
-            @errors = ["invalid quote id"]
-            erb :failure
         end 
     end 
 

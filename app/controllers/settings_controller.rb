@@ -2,12 +2,14 @@
 class SettingsController < ApplicationController
 
     get '/projects/:id/settings/new' do 
+        redirect_if_not_logged_in
         @user = current_user
         @project = current_project
         erb :'settings/new'
     end
 
     post '/projects/:id/settings' do
+        redirect_if_not_logged_in
         @user = current_user
         @setting = Setting.new(setting_params)
         if @setting.save
@@ -16,7 +18,8 @@ class SettingsController < ApplicationController
         end
     end
 
-    get '/projects/:id/settings' do
+    get '/projects/:id/settings' do 
+        redirect_if_not_logged_in
         @project = current_project
         @user = current_user
         @settings = current_project.settings
@@ -24,6 +27,7 @@ class SettingsController < ApplicationController
     end 
 
     get '/projects/:id/settings/:sett_id' do 
+        redirect_if_not_logged_in
         @user = current_user
         @setting = Setting.find_by(id: params[:sett_id])
         @project = current_project
@@ -33,6 +37,7 @@ class SettingsController < ApplicationController
     end 
 
     get '/projects/:id/settings/:sett_id/edit' do 
+        redirect_if_not_logged_in
         @user = current_user
         @setting = Setting.find_by(id: params[:sett_id])
         @project = current_project 
@@ -42,6 +47,7 @@ class SettingsController < ApplicationController
     end 
 
     patch '/projects/:id/settings/:sett_id' do 
+        redirect_if_not_logged_in
         @user = current_user
         @setting = Setting.find_by(id: params[:sett_id])
         @project = current_project

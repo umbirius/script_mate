@@ -2,12 +2,14 @@ require 'byebug'
 
 class CharactersController < ApplicationController
     get '/projects/:id/characters/new' do
+        redirect_if_not_logged_in
         @user = current_user
         @project = current_project
         erb :'characters/new'
     end 
 
     post '/projects/:id/characters' do
+        redirect_if_not_logged_in
         @user = current_user
         @character = Character.new(character_params)
         if @character.save
@@ -17,6 +19,7 @@ class CharactersController < ApplicationController
     end
 
     get '/projects/:id/characters' do
+        redirect_if_not_logged_in
         @project = current_project
         @user = current_user
         @characters = current_project.characters
@@ -24,18 +27,17 @@ class CharactersController < ApplicationController
     end 
 
     get '/projects/:id/characters/:char_id' do
+        redirect_if_not_logged_in
         @user = current_user 
         @character = Character.find_by(id: params[:char_id])
         @project = current_project
         if @character 
             erb :'characters/id_page'
-        else 
-            @errors = ["no page here"]
-            erb :failure
         end
     end 
 
     get '/projects/:id/characters/:char_id/edit' do
+        redirect_if_not_logged_in
         @user = current_user
         @character = Character.find_by(id: params[:char_id])
         @project = current_project 
@@ -45,6 +47,7 @@ class CharactersController < ApplicationController
     end 
 
     patch '/projects/:id/characters/:char_id' do
+        redirect_if_not_logged_in
         @user = current_user
         @character = Character.find_by(id: params[:char_id])
         @project = current_project

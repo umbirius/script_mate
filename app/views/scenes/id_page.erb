@@ -1,14 +1,8 @@
-<h1> Scene <%= @scene.name %> </h1>
+<h2><%= @scene.name %></h2>
 
-<h2>Name: <%= @scene.name %></h2>
-<h2>Description: <%= @scene.description %></h2>
+<h4>Name:</h4>
+<p> <%= @scene.name %></hp>
+<h4>Description: </h4>
+<p><%= @scene.description %></p>
 
-
-<p><a href="/projects/<%= @project.id %>/scenes/<%= @scene.id%>/edit"> Edit </a></p>
-
-<form method='POST' action="/projects/<%= @project.id %>/scenes/<%= @scene.id %>/delete">
-<input type="hidden" name="_method" value="delete">
-
-<input type="submit" value="delete">
-
-<p><a href="/projects/<%= @project.id %>">Back</a></p>
+<p><a href="/projects/<%= @project.id %>" class=" btn btn-default btn-xs">Back</a></p>
