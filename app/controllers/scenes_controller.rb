@@ -1,4 +1,4 @@
-require 'byebug'
+require 'pry'
 class ScenesController < ApplicationController
 
     get '/projects/:id/scenes/new' do 
@@ -34,17 +34,31 @@ class ScenesController < ApplicationController
         @project = current_project
         @user = current_user
         @scenes = @project.scenes
-        i = 0
         @scenes.each do |scene|
+            scene.order = nil
+            scene.save
+        end
+        i = 0
+        flash[:error] = 
+        @scenes.each do |scene|
+
             scene.order = params[:order][i]
             scene.save
+            if scene.save
+            else 
+                scene.update(order: nil) 
+            end
             i+=1
         end
-        redirect "/projects/#{@project.id}/scenes"
-        flash[:success] = "Scene order has been updated."
+
+        if @project.scenes.find_by(order: nil)
+            flash[:error] = "All scenes must have a unique position in the sequence, re-enter order."
+            redirect "/projects/#{@project.id}/scenes/order/edit"
+        else 
+            flash[:success] = "Scene order has been updated."
+            redirect "/projects/#{@project.id}/scenes"
+        end
     end
-
-
 
     get '/projects/:id/scenes' do
         redirect_if_not_logged_in
