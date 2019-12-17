@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_12_17_022348) do
   end
 
   create_table "days", force: :cascade do |t|
-    t.date "date"
+    t.datetime "date"
   end
 
   create_table "posts", force: :cascade do |t|
