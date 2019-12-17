@@ -23,7 +23,7 @@ Or install it yourself as:
 
 ## Usage
 
-1 - Run shotgun in your terminal, but make first make sure you are in the right directory
+1 - Run shotgun in your terminal, but make first make sure you are in the right directory 
 2 - Access the local port or IP address in the terminal to reach Script Mate
 3 - Create a profile 
 4 - Login
