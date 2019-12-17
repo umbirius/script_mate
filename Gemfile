@@ -11,6 +11,7 @@ gem 'sqlite3'
 gem 'rake'
 gem 'bcrypt'
 gem 'sinatra-flash'
+gem 'tty-tree', '~> 0.3.0'
 
 group :test, :development do 
     gem 'pry'

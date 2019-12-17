@@ -1,50 +1,53 @@
+require 'pry'
+
 class SessionsController < ApplicationController
 
     get '/signup' do
         erb :'sessions/signup'
-      end
+    end
     
-      post '/signup' do
+    post '/signup' do
         user = User.new(user_params)
         if User.find_by(username: params[:username])
-          flash[:error] = "The username, #{params[:username]}, is already taken"
-          redirect '/signup'
+            flash[:error] = "The username, #{params[:username]}, is already taken"
+            redirect '/signup'
         elsif User.find_by(email: params[:email])
-          flash[:error] = "There is a username associated with #{params[:email]}"
-          redirect '/signup'
-        else 
-          flash[:success] = "Sign up successful!"
-          redirect '/login'
+            flash[:error] = "There is a username associated with #{params[:email]}"
+            redirect '/signup'
+        else
+            user.save
+            flash[:success] = "Sign up successful!"
+            redirect '/login'
         end
-      end
+    end
     
-      get '/login' do
+    get '/login' do
         erb :'sessions/login'
-      end
+    end
     
-      post '/login' do
+    post '/login' do
         @user = User.find_by(username: params[:username])
         if @user && @user.authenticate(params[:password])
-          session[:user_id] = @user.id
-          flash[:success] = "Login successful. Welcome, #{@user.username}!"
-          redirect '/'
-          redirect "/projects"
+            session[:user_id] = @user.id
+            flash[:success] = "Login successful. Welcome, #{@user.username}!"
+            redirect '/'
+            redirect "/projects"
         else
-          flash[:error] = "Invalid username or password"
-          redirect '/login'
+            flash[:error] = "Invalid username or password"
+            redirect '/login'
         end
-      end
+    end
     
-      get '/logout' do
+    get '/logout' do
         session.clear
         flash[:success] = "Logout successful."
         redirect '/'
-      end 
+    end 
 
     get '/:user/profile' do
         #add protection only for user that is in
         @user = current_user
-         erb :'sessions/profile'
+        erb :'sessions/profile'
     end 
 
     get '/:user/profile/edit' do

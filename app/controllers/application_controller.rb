@@ -53,7 +53,7 @@ class ApplicationController < Sinatra::Base
   private
 
   def user_params
-    { username: params[:username], password: params[:password] }
+    { username: params[:username], password: params[:password] , email: params[:email]}
   end
 
 end
