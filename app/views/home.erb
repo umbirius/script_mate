@@ -1,11 +1,18 @@
-<h1>Writer's Block</h1>
+<h1> <%=@title%> </h1>
 <hr>
 <% @days.each do |day| %>
+    <% p = Post.find_by(day_id: day.id) %>
     <h3> <%=day.date.strftime("%B %d, %Y")%></h3>
-    <li>Post info</li>
-    <li>Creating Suspense</li>
-<% end %>
-
-<% if !!logged_in? %>
-    <ul><a href="/projects">Projects</a></ul>
+    <h4> <%= p.name %> </h4>
+    <iframe width="560" height="315" 
+        src="<%= p.link %>" frameborder="0" 
+        allow="accelerometer; 
+        autoplay; 
+        encrypted-media; 
+        gyroscope; 
+        picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+    <p><%= p.content %></p>
+    <hr>
 <% end %>
