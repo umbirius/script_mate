@@ -10,7 +10,7 @@ class ApplicationController < Sinatra::Base
   end 
 
   get '/' do
-    @title = "Script Mate"
+    @title = "ScriptMate"
     @days = Day.all
     if !!logged_in?
       @user = current_user

@@ -1,7 +1,7 @@
 
-# Script Mate
+# ScriptMate
 
-Script Mate is an organization tool used for aspiring writers and story tellers to stay organized. With the ability to track projects, characters, settings, and scenes, a user will always be able to stay on top of their projects. In addition to organizational outlines, Script Mate also offers a feed on the home page offering users videos as added resources to help add dimensions to their stories. 
+ScriptMate is an organization tool used for aspiring writers and story tellers. With the ability to track projects, characters, settings, and scenes, a user will always be able to stay on top of their projects. In addition to organizational outlines, Script Mate also offers a feed on the home page offering users videos as added resources to help add dimensions to their stories. 
 
 Grab your mate and share your script!
 
