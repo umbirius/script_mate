@@ -1,9 +1,10 @@
 <h1>Writer's Block</h1>
 <hr>
-
-<h3> <%=@time%></h3>
-<li>Developing Characters</li>
-<li>Creating Suspense</li>
+<% @days.each do |day| %>
+    <h3> <%=day.date.strftime("%B %d, %Y")%></h3>
+    <li>Post info</li>
+    <li>Creating Suspense</li>
+<% end %>
 
 <% if !!logged_in? %>
     <ul><a href="/projects">Projects</a></ul>

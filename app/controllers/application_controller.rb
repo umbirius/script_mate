@@ -10,8 +10,7 @@ class ApplicationController < Sinatra::Base
   end 
 
   get '/' do
-    @days = Days.all
-    time.now.strftime("%B %d, %Y") 
+    @days = Day.all
     if !!logged_in?
       @user = current_user
       erb :home
