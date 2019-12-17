@@ -10,6 +10,7 @@ class ApplicationController < Sinatra::Base
   end 
 
   get '/' do
+    @title = "Script Mate"
     @days = Day.all
     if !!logged_in?
       @user = current_user
@@ -19,10 +20,11 @@ class ApplicationController < Sinatra::Base
     end 
   end
 
-  get '/failure' do 
-    @errors = ["corn", "lemon", "bacon"]
-    erb :failure
-  end
+  get '/about' do
+    @user = current_user 
+    @title = "Script Mate" 
+    erb :about
+  end 
 
   helpers do 
     def logged_in?

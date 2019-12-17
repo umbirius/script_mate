@@ -1,10 +1,11 @@
-<h1>About</h1>
+<h1><%= @title %></h1>
 <hr>
 
-<h3> <%=@time%></h3>
-<p></p>
-<li>Creating Suspense</li>
+<h3> About us</h3> 
+<p><strong>Here at <%= @title %>, we wanted to bring aspiring writers
+ and storytellers the ability to stay organized and keep all of their ideas in one place.
+ We find that there are brilliant people out there with amazing stories trapped in their
+  minds and we want to help the get them out. In addition to offering organization for your
+  ideas, we also offer daily posts and videos to help you sharpen your pencil as you go.</strong></p>
 
-<% if !!logged_in? %>
-    <ul><a href="/projects">Projects</a></ul>
-<% end %>
+  <p><strong>Grab your script, then grab your mate!</strong></p>
