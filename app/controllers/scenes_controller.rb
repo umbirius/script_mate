@@ -43,7 +43,6 @@ class ScenesController < ApplicationController
         @scenes.each do |scene|
 
             scene.order = params[:order][i]
-            scene.save
             if scene.save
             else 
                 scene.update(order: nil) 
