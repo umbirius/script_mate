@@ -24,7 +24,7 @@ class ApplicationController < Sinatra::Base
     if logged_in? 
       @user = current_user
     end 
-    @title = "Script Mate" 
+    @title = "ScriptMate" 
     erb :about
   end 
 
