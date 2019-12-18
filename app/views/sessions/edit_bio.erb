@@ -53,11 +53,11 @@ label {
 
 <body>
 <p> 
-    <form method="POST" action="/<%= @user.username%>/profile">
+    <form method="POST" action="/profile">
     <input type="hidden" name="_method" value="patch">
   <div class="row">
     <div class="control-label col-sm-2">
-      <label for="bio">Bio</label>
+      <label for="bio">Bio:</label>
     </div>
     <div class="col-75">
       <textarea id="bio" name="bio" style="height:200px" ><%= @user.bio %></textarea>
@@ -68,7 +68,7 @@ label {
   </div>
   </form>
   <div class="col-75">
-    <a href="/#{@user.username}/profile" class=" btn btn-default btn-xs">Back</a></p>
+    <a href="/profile" class=" btn btn-default btn-xs">Back</a></p>
   </div>
   </div>
   </form>

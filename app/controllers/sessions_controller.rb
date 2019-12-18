@@ -63,7 +63,7 @@ class SessionsController < ApplicationController
         @user = current_user
         if @user.update(bio: params[:bio])
             flash[:success] = "Profile has been updated"
-            redirect '/:user/profile'
+            redirect '/profile'
         end
     end
 end 
