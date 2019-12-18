@@ -1,18 +1,24 @@
-<h1> <%=@title%> </h1>
+
+<div class="container-fluid text-center"> 
+    <h1> <%=@title%> </h1>
+</div>
 <hr>
 <% @days.each do |day| %>
-    <% p = Post.find_by(day_id: day.id) %>
-    <h3> <%=day.date.strftime("%B %d, %Y")%></h3>
-    <h4> <%= p.name %> </h4>
-    <iframe width="560" height="315" 
-        src="<%= p.link %>" frameborder="0" 
-        allow="accelerometer; 
-        autoplay; 
-        encrypted-media; 
-        gyroscope; 
-        picture-in-picture" 
-        allowfullscreen>
-    </iframe>
-    <p><%= p.content %></p>
-    <hr>
+    <div class="container-fluid text-center">  
+        <% p = Post.find_by(day_id: day.id) %>
+        <h3> <%=day.date.strftime("%B %d, %Y")%></h3>
+        <h4> <%= p.name %> </h4>
+        <iframe width="560" height="315" 
+            src="<%= p.link %>" frameborder="0" 
+            allow="accelerometer; 
+            autoplay; 
+            encrypted-media; 
+            gyroscope; 
+            picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+        </div>
+        <p><%= p.content %></p>
+        <hr>
 <% end %>
+
