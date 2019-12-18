@@ -44,21 +44,21 @@ class SessionsController < ApplicationController
         redirect '/'
     end 
 
-    get '/:user/profile' do
+    get '/profile' do
         redirect_if_not_logged_in
         #add protection only for user that is in
         @user = current_user
         erb :'sessions/profile'
     end 
 
-    get '/:user/profile/edit' do
+    get '/profile/edit' do
         redirect_if_not_logged_in
         #add protection only for user that is in
         @user = current_user
         erb :'sessions/edit_bio'
     end 
 
-    patch '/:user/profile' do
+    patch '/profile' do
         redirect_if_not_logged_in
         @user = current_user
         if @user.update(bio: params[:bio])

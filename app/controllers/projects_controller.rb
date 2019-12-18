@@ -56,7 +56,7 @@ class ProjectsController < ApplicationController
     end
 
 
-    delete '/projects/:id/delete' do
+    delete '/projects/:id' do
         @user = current_user
         @project = Project.find_by(id: params[:id])
         if @project

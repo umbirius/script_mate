@@ -58,7 +58,7 @@ class SettingsController < ApplicationController
     end
 
 
-    delete '/projects/:id/settings/:sett_id/delete' do 
+    delete '/projects/:id/settings/:sett_id' do 
         @user = current_user
         @setting = Setting.find_by(id: params[:sett_id])
         @project = current_project 

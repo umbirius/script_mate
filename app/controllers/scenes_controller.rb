@@ -98,7 +98,7 @@ class ScenesController < ApplicationController
         end
     end
 
-    delete '/projects/:id/scenes/:scene_id/delete' do
+    delete '/projects/:id/scenes/:scene_id' do
         redirect_if_not_logged_in
         @user = current_user
         @scene = Scene.find_by(id: params[:scene_id])

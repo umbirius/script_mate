@@ -57,7 +57,7 @@ class CharactersController < ApplicationController
         end
     end
 
-    delete '/projects/:id/characters/:char_id/delete' do
+    delete '/projects/:id/characters/:char_id' do
         @user = current_user
         @character = Character.find_by(id: params[:char_id])
         @project = current_project 
