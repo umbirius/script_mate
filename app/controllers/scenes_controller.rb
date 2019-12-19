@@ -39,7 +39,6 @@ class ScenesController < ApplicationController
             scene.save
         end
         i = 0
-        flash[:error] = 
         @scenes.each do |scene|
 
             scene.order = params[:order][i]
