@@ -1,4 +1,5 @@
 require 'byebug'
+require 'pry'
 class ProjectsController < ApplicationController
     
     get '/projects' do
@@ -26,6 +27,7 @@ class ProjectsController < ApplicationController
     
     get '/projects/:id' do
         redirect_if_not_logged_in
+        redirect_if_not_user(:id)
         @user = current_user
         @project = Project.find_by(id: params[:id])
         session[:project_id] = @project.id
