@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
     
     get '/projects/:id' do
         redirect_if_not_logged_in
-        redirect_if_not_user(:id)
+        redirect_if_not_user(Project, params[:id], '/projects')
         @user = current_user
         @project = Project.find_by(id: params[:id])
         session[:project_id] = @project.id
@@ -39,6 +39,7 @@ class ProjectsController < ApplicationController
 
     get '/projects/:id/edit' do
         redirect_if_not_logged_in
+        redirect_if_not_user(Project, params[:id], '/projects')
         @user = current_user
         redirect_if_not_logged_in 
         @project = Project.find_by(id: params[:id])

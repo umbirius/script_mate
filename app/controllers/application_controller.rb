@@ -48,11 +48,16 @@ class ApplicationController < Sinatra::Base
       Project.find(session[:project_id])
     end
 
-    def redirect_if_not_user(id)
-      unless Project.find(id).user == current_user
-        flash[:error] = "Restricted pathway"
-        redirect '/projects'
-      end
+    def redirect_if_not_user(class_var, id, desired_path)
+      if class_var.exists?(id)
+        unless class_var.find(id).user == current_user
+          flash[:error] = "Access Denied: Restricted pathway"
+          redirect desired_path
+        end
+      else
+        flash[:error] = "Access Denied: Restricted pathway"
+        redirect desired_path
+      end 
     end 
     
   end 
