@@ -60,6 +60,7 @@ class ScenesController < ApplicationController
 
     get '/projects/:id/scenes' do
         redirect_if_not_logged_in
+        redirect_if_not_user(Project, params[:id], '/projects')
         @project = current_project
         @user = current_user
         @scenes = current_project.scenes
@@ -68,6 +69,7 @@ class ScenesController < ApplicationController
 
     get '/projects/:id/scenes/:scene_id' do 
         redirect_if_not_logged_in
+        redirect_if_project_content_not_user(Scene, params[:scene_id], "/projects/#{params[:id]}/scenes")
         @user = current_user
         @scene = Scene.find_by(id: params[:scene_id])
         @project = current_project
@@ -78,6 +80,7 @@ class ScenesController < ApplicationController
 
     get '/projects/:id/scenes/:scene_id/edit' do 
         redirect_if_not_logged_in
+        redirect_if_project_content_not_user(Scene, params[:scene_id], "/projects/#{params[:id]}/scenes")
         @user = current_user
         @scene = Scene.find_by(id: params[:scene_id])
         @project = current_project 
