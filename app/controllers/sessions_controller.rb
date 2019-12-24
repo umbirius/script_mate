@@ -8,16 +8,12 @@ class SessionsController < ApplicationController
     
     post '/signup' do
         user = User.new(user_params)
-        if User.find_by(username: params[:username])
-            flash[:error] = "The username, #{params[:username]}, is already taken"
-            redirect '/signup'
-        elsif User.find_by(email: params[:email])
-            flash[:error] = "There is a username associated with #{params[:email]}"
-            redirect '/signup'
-        else
-            user.save
+        if user.save
             flash[:success] = "Sign up successful!"
             redirect '/login'
+        else
+            flash[:error] = user.errors.messages.map {|key, value| "#{key}: #{value.first}"}
+            redirect '/signup'
         end
     end
     
@@ -46,14 +42,12 @@ class SessionsController < ApplicationController
 
     get '/profile' do
         redirect_if_not_logged_in
-        #add protection only for user that is in
         @user = current_user
         erb :'sessions/profile'
     end 
 
     get '/profile/edit' do
         redirect_if_not_logged_in
-        #add protection only for user that is in
         @user = current_user
         erb :'sessions/edit_bio'
     end 

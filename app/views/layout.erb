@@ -89,17 +89,15 @@
     </div>
     <div class="col-sm-8 text-left"> 
 
-        <% flash.keys.each do |type| %>
-            <% if flash[type] == flash[:success] %>
+            <% if flash[:success] %>
                 <div class="panel panel-success">
-                    <div class="panel-heading"><%= flash[type] %></div>
+                    <div class="panel-heading"><%= flash[:success] %></div>
                 </div>
-            <% elsif flash[type] == flash[:error] %>
+            <% elsif flash[:error] %>
                 <div class="panel panel-danger">
-                    <div class="panel-heading"><%= flash[type] %></div>
+                    <div class="panel-heading"><%= flash[:error].join("<br>")%></div>
                 </div>
             <% end %>
-        <% end %>
 
       <%= yield %>
       
