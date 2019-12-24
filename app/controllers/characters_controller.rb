@@ -20,6 +20,7 @@ class CharactersController < ApplicationController
 
     get '/projects/:id/characters' do
         redirect_if_not_logged_in
+        redirect_if_not_user(Project, params[:id], '/projects')
         @project = current_project
         @user = current_user
         @characters = current_project.characters
@@ -28,6 +29,7 @@ class CharactersController < ApplicationController
 
     get '/projects/:id/characters/:char_id' do
         redirect_if_not_logged_in
+        redirect_if_project_content_not_user(Character, params[:char_id], "/projects/#{params[:id]}/characters")
         @user = current_user 
         @character = Character.find_by(id: params[:char_id])
         @project = current_project
@@ -38,6 +40,7 @@ class CharactersController < ApplicationController
 
     get '/projects/:id/characters/:char_id/edit' do
         redirect_if_not_logged_in
+        redirect_if_project_content_not_user(Character, params[:char_id], "/projects/#{params[:id]}/characters")
         @user = current_user
         @character = Character.find_by(id: params[:char_id])
         @project = current_project 

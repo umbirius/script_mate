@@ -49,7 +49,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def redirect_if_not_user(class_var, id, desired_path)
-      if class_var.exists?(id)
+      if class_var.exists?(id) 
         unless class_var.find(id).user == current_user
           flash[:error] = "Access Denied: Restricted pathway"
           redirect desired_path
@@ -59,6 +59,18 @@ class ApplicationController < Sinatra::Base
         redirect desired_path
       end 
     end 
+
+  def redirect_if_project_content_not_user(class_var, id, desired_path)
+    if class_var.exists?(id) && !!class_var.find(id).project
+      unless class_var.find(id).project.user == current_user
+        flash[:error] = "Access Denied: Restricted pathway"
+        redirect desired_path
+      end 
+    else 
+      flash[:error] = "Access Denied: Restricted pathway"
+      redirect desired_path
+    end 
+  end 
     
   end 
 
