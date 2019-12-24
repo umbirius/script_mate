@@ -20,6 +20,7 @@ class SettingsController < ApplicationController
 
     get '/projects/:id/settings' do 
         redirect_if_not_logged_in
+        redirect_if_not_user(Project, params[:id], '/projects')
         @project = current_project
         @user = current_user
         @settings = current_project.settings
@@ -28,6 +29,7 @@ class SettingsController < ApplicationController
 
     get '/projects/:id/settings/:sett_id' do 
         redirect_if_not_logged_in
+        redirect_if_project_content_not_user(Setting, params[:sett_id], "/projects/#{params[:id]}/settings")
         @user = current_user
         @setting = Setting.find_by(id: params[:sett_id])
         @project = current_project
