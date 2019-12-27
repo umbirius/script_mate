@@ -12,13 +12,19 @@ class SessionsController < ApplicationController
             flash[:success] = "Sign up successful!"
             redirect '/login'
         else
-            flash[:error] = user.errors.messages.map {|key, value| "#{key}: #{value.first}"}
+            message = user.errors.messages.map {|key, value| "#{key}: #{value.first}"}
+            flash[:error] = message.join("<br>")
             redirect '/signup'
         end
     end
     
     get '/login' do
-        erb :'sessions/login'
+        if logged_in?
+            flash[:error] = "You are already logged in."
+            redirect '/'
+        else 
+            erb :'sessions/login'
+        end 
     end
     
     post '/login' do
