@@ -3,7 +3,12 @@ require 'pry'
 class SessionsController < ApplicationController
 
     get '/signup' do
-        erb :'sessions/signup'
+        if logged_in?
+            flash[:error] = "You are already have an account."
+            redirect '/'
+        else
+            erb :'sessions/signup'
+        end
     end
     
     post '/signup' do
